@@ -8,7 +8,13 @@ from sqlalchemy import create_engine
 
 
 def load_data(message_data_file, category_data_file):
+    """
+    Load data from csv file
+    :param message_data_file: Messages (.csv file)
+    :param category_data_file: category (.csv file)
     
+    :return df: On id merged dataset as pandas dataframe 
+    """
     # read in file
     messages = pd.read_csv(message_data_file)
     categories = pd.read_csv(category_data_file)
@@ -20,6 +26,12 @@ def load_data(message_data_file, category_data_file):
 
 
 def clean_data(df):
+    """
+    Clean data
+    :param df: pandas dataframe
+    
+    :return df: pandas dataframe 
+    """
     # split categories
     categories = df.categories.str.split(';', expand=True)
     
@@ -51,6 +63,11 @@ def clean_data(df):
 
 
 def save_df(df, data_filename):
+    """
+    save Dataframe
+    :param df: pandas dataframe
+    :param data_filename: filename (str)
+    """
     engine = create_engine('sqlite:///' + data_filename)
     df.to_sql('Categorized_Responses', engine, if_exists='replace', index=False) 
 
