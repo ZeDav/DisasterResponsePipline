@@ -15,6 +15,12 @@ from sqlalchemy import create_engine
 app = Flask(__name__)
 
 def tokenize(text):
+    """
+    Tokenize text data
+    :param text: Messages (string)
+    
+    :return clean_tokens: Normalized, tokenized and lemmatized Message (list) 
+    """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -41,7 +47,8 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
-    
+
+    # modification
     category_examples_count = df[df.columns[4:]].sum().sort_values(ascending=False)
     category_names = list(category_examples_count.index)
     # create visuals
@@ -66,7 +73,7 @@ def index():
             }
         },
 
-        {
+        {# modification
             'data': [
                 Bar(
                     x=category_names,
