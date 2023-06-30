@@ -9,7 +9,7 @@ from sqlalchemy import create_engine
 
 def load_data(message_data_file, category_data_file):
     """
-    Load data from csv file
+    Load data from csv files
     :param message_data_file: Messages (.csv file)
     :param category_data_file: category (.csv file)
     
@@ -27,7 +27,11 @@ def load_data(message_data_file, category_data_file):
 
 def clean_data(df):
     """
-    Clean data
+    Clean data: Split of categories from datafram. 
+                Subcategories from categories are written in own columns, 
+                and this columns are named after subcategories. 
+                Subcategories values made only digits 0 and 1 and converted to 
+                numeric. Merge splited dataframes.
     :param df: pandas dataframe
     
     :return df: pandas dataframe 
@@ -64,7 +68,7 @@ def clean_data(df):
 
 def save_df(df, data_filename):
     """
-    save Dataframe
+    save Dataframe as sqlite file
     :param df: pandas dataframe
     :param data_filename: filename (str)
     """
